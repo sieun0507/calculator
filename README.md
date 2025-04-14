@@ -1,4 +1,4 @@
-# calculator
+# calculato
 ## 소개
 Python과 tkinter로 만든 GUI 기반 공학용 계산기입니다. 기본 계산부터 고급 수학 함수까지 지원합니다.
 ## 기능
