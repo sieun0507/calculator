@@ -15,6 +15,7 @@ headers = {
 
 # 엑셀 파일 경로 (한글 경로도 가능)
 excel_path = r"C:\Users\sieun\Downloads\농협_입출금거래내역조회결과_20250414_185433.xlsx"
+ # 엑셀에서 거래내역의 머리글(헤더) 시작 행 (기본: 11 → 실제로는 12번째 줄)
 df = pd.read_excel(excel_path, header=11)
 df = df[df["입금금액"].notna() | df["출금금액"].notna()]
 df = df.fillna("")
