@@ -17,24 +17,38 @@
 
 ## 🗂️ 사용 방법
 
+# 💰 Notion 가계부 자동 등록기
+
+농협 Excel 금융거래내역을 Notion 데이터베이스에 자동으로 등록하는 파이썬 스크립트입니다.  
+입출금 내역을 자동으로 인식하고, 날짜/금액/계좌/구분 등의 정보를 정리해 Notion에 깔끔하게 저장해줍니다.
+
+---
+
+## 📌 주요 기능
+
+- 엑셀에서 거래내역 자동 파싱 (입출금 구분 포함)
+- Notion 데이터베이스와 연동하여 자동 등록
+- 중복 거래 방지를 위한 **고유값** 체크
+- 거래기록이 없으면 **거래 내용**으로 대체
+
+---
+
+## 🛠️ 사용 방법
+
 ### 1. 노션 API 연동 준비
 
-- [Notion Developers](https://www.notion.so/my-integrations)에서 **새 통합 만들기**
-- **Internal Integration Token (API 키)** 발급
-- 가계부 데이터베이스 페이지에 접근 권한 부여
-- 데이터베이스 URL에서 **Database ID** 추출
+1. [Notion Developers](https://www.notion.so/my-integrations)에서 **새로운 통합 (Integration)** 생성
+2. 생성된 통합에서 **Internal Integration Token** 복사
+3. 가계부 데이터베이스 페이지에서 해당 통합에 대한 **공유 권한 부여**
+4. 데이터베이스 링크(URL)에서 **Database ID** 추출  
+ 예 : 'https://www.notion.so/yourworkspace/자동-가계부-1234567890abcdef1234567890abcdef' 중 '1234567890abcdef1234567890abcdef' 
+---
 
-### 2. 노션 데이터베이스 구조 예시
+### 2. 엑셀 파일 설정
 
-| 속성 이름 | 유형      | 설명                           |
-|-----------|-----------|--------------------------------|
-| 거래내용   | 제목      | 거래 기록 사항 또는 거래 내용 |
-| 날짜      | 날짜(Date)| 거래 일시                      |
-| 금액      | 숫자      | 입금은 +, 출금은 -로 저장     |
-| 구분      | 선택      | `입금`, `출금` 중 하나        |
-| 고유값    | 텍스트    | 중복 체크용 (날짜+내용+금액)  |
-
-> 📌 이 구조를 따라 노션 데이터베이스를 만들어주세요.
+- `EXCEL_FILE_PATH`: 불러올 **엑셀 파일의 전체 경로** 입력 (한글 경로도 가능)
+- `EXCEL_HEADER_ROW`: **거래내역이 시작되는 행 번호 - 1** 설정  
+  예: 거래내역이 12번째 줄부터 시작되면 → `EXCEL_HEADER_ROW = 11`
 
 ---
 
@@ -46,4 +60,5 @@
 NOTION_API_KEY = "your_notion_api_key"
 DATABASE_ID = "your_notion_database_id"
 EXCEL_FILE_PATH = r"C:\경로\거래내역.xlsx"
+df = pd.read_excel(excel_path, header=11)
 
