@@ -54,6 +54,11 @@
 
 ## 🐍 파이썬 코드 주요 설정
 
+### pip 설치
+```python
+pip install pandas requests openpyxl
+```
+
 ### 🔧 직접 입력해야 하는 부분
 
 ```python
